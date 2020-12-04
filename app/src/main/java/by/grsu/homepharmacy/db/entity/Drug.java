@@ -17,7 +17,7 @@ import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.NO_ACTION;
 
 @Entity
-public class Drug implements Serializable {
+public class Drug implements Serializable{
 
     @PrimaryKey(autoGenerate = true)
     private int drugId;

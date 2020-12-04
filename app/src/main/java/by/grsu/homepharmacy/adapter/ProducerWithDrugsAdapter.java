@@ -46,11 +46,13 @@ public class ProducerWithDrugsAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.producer_item, parent, false);
         }
 
-        TextView nameView = (TextView) view.findViewById(R.id.name);
+        TextView producerName = (TextView) view.findViewById(R.id.producerName);
+        TextView producerCountry = (TextView) view.findViewById(R.id.producerCountry);
 
         ProducerWithDrugs producer = producers.get(position);
 
-        nameView.setText(producer.getProducer().getName());
+        producerName.setText(producer.getProducer().getName());
+        producerCountry.setText(producer.getProducer().getCountry());
 
         return view;
     }

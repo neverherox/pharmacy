@@ -1,6 +1,7 @@
 package by.grsu.homepharmacy.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
             ProducerWithDrugs producer = (ProducerWithDrugs) producerListView.getItemAtPosition(info.position);
 
-            menu.add("Delete");
+            menu.add("delete");
     }
 
     @Override
@@ -80,32 +81,27 @@ public class MainActivity extends AppCompatActivity {
 
                 ProducerWithDrugs producer = (ProducerWithDrugs) parent.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, DrugsActivity.class);
-                intent.putExtra("drugs",  (ArrayList<Drug>)producer.getDrugs());
+                intent.putExtra("producerId",producer.getProducer().getProducerId());
                 startActivity(intent);
             }
         };
         producerListView.setOnItemClickListener(itemListener);
     }
 
-    public void add(View view)
+    public void createProducer(View view)
     {
-        Drug drug = new Drug();
-        drug.setName("123");
-        drug.setDescription("123");
-        drug.setExpirationDate("123");
-        drug.setForm(Form.GASEOUS);
-
-
-        Producer producer = new Producer();
-        producer.setName("----");
-        producer.setCountry("----");
-
-        ProducerWithDrugs producerWithDrugs = new ProducerWithDrugs();
-        producerWithDrugs.getDrugs().add(drug);
-        producerWithDrugs.getDrugs().add(drug);
-
-        producerWithDrugs.setProducer(producer);
-        producerViewModel.insert(producerWithDrugs);
+        Intent intent = new Intent(MainActivity.this, NewProducerActivity.class);
+        startActivityForResult(intent,1);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Producer producer = (Producer) data.getSerializableExtra("producer");
+        ProducerWithDrugs newProducer = new ProducerWithDrugs();
+
+        newProducer.setProducer(producer);
+        producerViewModel.insert(newProducer);
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

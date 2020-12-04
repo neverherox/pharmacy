@@ -12,16 +12,14 @@ import by.grsu.homepharmacy.repository.ProducerRepository;
 
 public class ProducerViewModel extends AndroidViewModel {
     private ProducerRepository producerRepository;
-    private LiveData<List<ProducerWithDrugs>> producers;
 
     public ProducerViewModel(Application application) {
         super(application);
         producerRepository = new ProducerRepository(application);
-        producers = producerRepository.getProducers();
     }
 
     public LiveData<List<ProducerWithDrugs>> getProducers() {
-        return producers;
+        return producerRepository.getProducers();
     }
     public void insert(ProducerWithDrugs producer) {
         producerRepository.insert(producer);
@@ -29,4 +27,5 @@ public class ProducerViewModel extends AndroidViewModel {
     public void delete(ProducerWithDrugs producer) {
         producerRepository.delete(producer);
     }
+
 }

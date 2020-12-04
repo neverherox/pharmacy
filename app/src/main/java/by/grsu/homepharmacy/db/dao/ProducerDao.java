@@ -15,7 +15,7 @@ import by.grsu.homepharmacy.db.entity.Producer;
 import by.grsu.homepharmacy.db.relation.ProducerWithDrugs;
 
 @Dao
-public interface ProducerDao {
+public interface ProducerDao extends GenericDao<Producer>{
 
     @Transaction
     @Query("SELECT * FROM Producer")
@@ -24,20 +24,4 @@ public interface ProducerDao {
     @Transaction
     @Query("SELECT * FROM Producer WHERE producerId = :id")
     LiveData<ProducerWithDrugs> getById(int id);
-
-    @Transaction
-    @Insert
-    long insert(Producer producer);
-
-    @Insert
-    void insert(List<Drug> drugs);
-
-    @Update
-    void update(Producer producer);
-
-    @Delete
-    void delete(Producer producer);
-
-    @Delete
-    void delete(List<Drug> drugs);
 }

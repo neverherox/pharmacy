@@ -13,25 +13,26 @@ import by.grsu.homepharmacy.db.entity.Drug;
 public class DrugRepository {
     private PharmacyDataBase pharmacyDataBase;
     private DrugDao drugDao;
-    private LiveData<List<Drug>> drugs;
 
     public DrugRepository(Application application) {
         pharmacyDataBase = PharmacyDataBase.getInstance(application);
         drugDao = pharmacyDataBase.drugDao();
-        drugs = drugDao.getAll();
     }
 
-    public LiveData<List<Drug>> getDrugs() {
-        return drugs;
+    public LiveData<List<Drug>> getDrugs(int producerId) {
+        return drugDao.getAll(producerId);
     }
 
-    public LiveData<Drug> getById(int id) {
-        return drugDao.getById(id);
-    }
 
     public void insert(Drug drug) {
         PharmacyDataBase.databaseWriteExecutor.execute(() -> {
             drugDao.insert(drug);
+        });
+    }
+
+    public void delete(Drug drug) {
+        PharmacyDataBase.databaseWriteExecutor.execute(() -> {
+            drugDao.delete(drug);
         });
     }
 }

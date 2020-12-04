@@ -13,22 +13,17 @@ import java.util.List;
 import by.grsu.homepharmacy.db.entity.Drug;
 
 @Dao
-public interface DrugDao {
+public interface DrugDao extends GenericDao<Drug>{
 
     @Transaction
-    @Query("SELECT * FROM Drug")
+    @Query("SELECT * FROM Drug ")
     LiveData<List<Drug>> getAll();
 
     @Transaction
     @Query("SELECT * FROM Drug WHERE drugId = :id")
     LiveData<Drug> getById(int id);
 
-    @Insert
-    long insert(Drug drug);
-
-    @Update
-    void update(Drug drug);
-
-    @Delete
-    void delete(Drug drug);
+    @Transaction
+    @Query("SELECT * FROM Drug WHERE producer_id =:producerId")
+    LiveData<List<Drug>> getAll(int producerId);
 }

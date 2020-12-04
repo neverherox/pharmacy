@@ -13,21 +13,22 @@ import by.grsu.homepharmacy.repository.DrugRepository;
 public class DrugViewModel extends AndroidViewModel {
 
     private DrugRepository drugRepository;
-    private LiveData<List<Drug>> drugs;
 
 
     public DrugViewModel(Application application) {
         super(application);
 
         drugRepository = new DrugRepository(application);
-        drugs = drugRepository.getDrugs();
     }
 
-    public LiveData<List<Drug>> getDrugs() {
-        return drugs;
+    public LiveData<List<Drug>> getDrugs(int producerId) {
+        return drugRepository.getDrugs(producerId);
     }
 
     public void insert(Drug drug) {
             drugRepository.insert(drug);
+    }
+    public void delete(Drug drug) {
+        drugRepository.delete(drug);
     }
 }

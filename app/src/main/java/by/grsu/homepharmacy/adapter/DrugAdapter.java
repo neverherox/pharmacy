@@ -45,11 +45,17 @@ public class DrugAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.drug_item, parent, false);
         }
 
-        TextView nameView = (TextView) view.findViewById(R.id.name);
+        TextView drugName = (TextView) view.findViewById(R.id.drugName);
+        TextView drugDescription = (TextView) view.findViewById(R.id.drugDescription);
+        TextView drugExpirationDate = (TextView) view.findViewById(R.id.drugExpirationDate);
+        TextView drugForm = (TextView) view.findViewById(R.id.drugForm);
 
         Drug drug = drugs.get(position);
 
-        nameView.setText(drug.getName());
+        drugName.setText(drug.getName());
+        drugDescription.setText(drug.getDescription());
+        drugExpirationDate.setText(drug.getExpirationDate());
+        drugForm.setText(drug.getForm().toString());
 
         return view;
     }
