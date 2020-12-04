@@ -38,4 +38,6 @@ public interface ProducerDao {
     @Delete
     void delete(Producer producer);
 
+    @Delete
+    void delete(List<Drug> drugs);
 }

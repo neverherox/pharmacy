@@ -4,13 +4,14 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import by.grsu.homepharmacy.db.entity.Drug;
 import by.grsu.homepharmacy.db.entity.Producer;
 
-public class ProducerWithDrugs {
+public class ProducerWithDrugs{
     @Embedded
     private Producer producer;
     @Relation(

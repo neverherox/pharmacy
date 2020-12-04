@@ -26,5 +26,7 @@ public class ProducerViewModel extends AndroidViewModel {
     public void insert(ProducerWithDrugs producer) {
         producerRepository.insert(producer);
     }
-
+    public void delete(ProducerWithDrugs producer) {
+        producerRepository.delete(producer);
+    }
 }

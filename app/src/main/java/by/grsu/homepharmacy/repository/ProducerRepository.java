@@ -39,4 +39,10 @@ public class ProducerRepository {
             producerDao.insert(producer.getDrugs());
         });
     }
+    public void delete(ProducerWithDrugs producer) {
+        PharmacyDataBase.databaseWriteExecutor.execute(() -> {
+        producerDao.delete(producer.getProducer());
+        producerDao.delete(producer.getDrugs());
+        });
+    }
 }

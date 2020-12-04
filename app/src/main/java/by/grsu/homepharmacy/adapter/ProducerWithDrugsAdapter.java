@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import java.util.List;
 
 import by.grsu.homepharmacy.R;
-import by.grsu.homepharmacy.db.entity.Drug;
 import by.grsu.homepharmacy.db.relation.ProducerWithDrugs;
 
 public class ProducerWithDrugsAdapter extends BaseAdapter {
@@ -41,20 +38,19 @@ public class ProducerWithDrugsAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
         if (view == null) {
-            view = lInflater.inflate(R.layout.list_item, parent, false);
+            view = lInflater.inflate(R.layout.producer_item, parent, false);
         }
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
-        TextView capitalView = (TextView) view.findViewById(R.id.capital);
 
         ProducerWithDrugs producer = producers.get(position);
 
         nameView.setText(producer.getProducer().getName());
-        capitalView.setText(producer.getProducer().getCountry());
 
         return view;
     }

@@ -1,17 +1,23 @@
 package by.grsu.homepharmacy.db.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import java.io.Serializable;
+
 import by.grsu.homepharmacy.db.converter.FormConverter;
 
+import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.NO_ACTION;
 
 @Entity
-public class Drug {
+public class Drug implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int drugId;
@@ -81,4 +87,5 @@ public class Drug {
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
+
 }

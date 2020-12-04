@@ -42,16 +42,14 @@ public class DrugAdapter extends BaseAdapter {
 
         View view = convertView;
         if (view == null) {
-            view = lInflater.inflate(R.layout.list_item, parent, false);
+            view = lInflater.inflate(R.layout.drug_item, parent, false);
         }
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
-        TextView capitalView = (TextView) view.findViewById(R.id.capital);
 
         Drug drug = drugs.get(position);
 
         nameView.setText(drug.getName());
-        capitalView.setText(drug.getDescription());
 
         return view;
     }
