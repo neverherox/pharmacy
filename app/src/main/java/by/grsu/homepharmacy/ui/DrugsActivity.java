@@ -56,14 +56,20 @@ public class DrugsActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         Drug drug = (Drug) drugListView.getItemAtPosition(info.position);
 
-        menu.add("delete");
+        menu.add(0,1,0,"delete");
+        menu.add(0,2,0,"update");
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Drug drug = (Drug) drugListView.getItemAtPosition(info.position);
-        drugViewModel.delete(drug);
+        switch (item.getItemId())
+        {
+            case 1: drugViewModel.delete(drug); break;
+            case 2: updateDrug(drug); break;
+
+        }
         return super.onContextItemSelected(item);
     }
 
@@ -73,11 +79,24 @@ public class DrugsActivity extends AppCompatActivity {
         startActivityForResult(intent,1);
     }
 
+    public void updateDrug(Drug drug)
+    {
+        Intent intent = new Intent(DrugsActivity.this, UpdateDrugActivity.class);
+        intent.putExtra("drug", drug);
+        startActivityForResult(intent,2);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         Drug drug = (Drug) data.getSerializableExtra("drug");
-        drug.setProducer_id(producerId);
-        drugViewModel.insert(drug);
+        switch(requestCode)
+        {
+            case 1: drug.setProducer_id(producerId);
+                    drugViewModel.insert(drug);
+                    break;
+            case 2: drugViewModel.update(drug);
+                    break;
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

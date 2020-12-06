@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,14 +63,20 @@ public class MainActivity extends AppCompatActivity {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
             ProducerWithDrugs producer = (ProducerWithDrugs) producerListView.getItemAtPosition(info.position);
 
-            menu.add("delete");
+            menu.add(0,1,0,"delete");
+            menu.add(0,2,0,"update");
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         ProducerWithDrugs producer = (ProducerWithDrugs) producerListView.getItemAtPosition(info.position);
-        producerViewModel.delete(producer);
+        switch (item.getItemId())
+        {
+            case 1: producerViewModel.delete(producer); break;
+            case 2: updateProducer(producer); break;
+        }
+
         return super.onContextItemSelected(item);
     }
 
@@ -93,15 +100,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, NewProducerActivity.class);
         startActivityForResult(intent,1);
     }
+    public void updateProducer(ProducerWithDrugs producer)
+    {
+        Intent intent = new Intent(MainActivity.this, UpdateProducerActivity.class);
+        intent.putExtra("producer", producer.getProducer());
+        startActivityForResult(intent,2);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         Producer producer = (Producer) data.getSerializableExtra("producer");
-        ProducerWithDrugs newProducer = new ProducerWithDrugs();
-
-        newProducer.setProducer(producer);
-        producerViewModel.insert(newProducer);
-
+        switch(requestCode)
+        {
+            case 1: ProducerWithDrugs newProducer = new ProducerWithDrugs();
+                    newProducer.setProducer(producer);
+                    producerViewModel.insert(newProducer);
+                    break;
+            case 2: producerViewModel.update(producer);
+                    break;
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

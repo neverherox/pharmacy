@@ -31,4 +31,5 @@ public class DrugViewModel extends AndroidViewModel {
     public void delete(Drug drug) {
         drugRepository.delete(drug);
     }
+    public void update(Drug drug) {drugRepository.update(drug); }
 }

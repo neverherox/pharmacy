@@ -35,4 +35,10 @@ public class DrugRepository {
             drugDao.delete(drug);
         });
     }
+    public void update(Drug drug)
+    {
+        PharmacyDataBase.databaseWriteExecutor.execute(() -> {
+            drugDao.update(drug);
+        });
+    }
 }

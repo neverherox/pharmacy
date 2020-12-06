@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import by.grsu.homepharmacy.db.entity.Producer;
 import by.grsu.homepharmacy.db.relation.ProducerWithDrugs;
 import by.grsu.homepharmacy.repository.ProducerRepository;
 
@@ -27,5 +28,6 @@ public class ProducerViewModel extends AndroidViewModel {
     public void delete(ProducerWithDrugs producer) {
         producerRepository.delete(producer);
     }
+    public void update(Producer producer) {producerRepository.update(producer);}
 
 }

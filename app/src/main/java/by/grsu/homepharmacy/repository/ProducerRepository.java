@@ -10,6 +10,7 @@ import by.grsu.homepharmacy.db.dao.DrugDao;
 import by.grsu.homepharmacy.db.dao.ProducerDao;
 import by.grsu.homepharmacy.db.PharmacyDataBase;
 import by.grsu.homepharmacy.db.entity.Drug;
+import by.grsu.homepharmacy.db.entity.Producer;
 import by.grsu.homepharmacy.db.relation.ProducerWithDrugs;
 
 public class ProducerRepository {
@@ -46,6 +47,11 @@ public class ProducerRepository {
         PharmacyDataBase.databaseWriteExecutor.execute(() -> {
         producerDao.delete(producer.getProducer());
         drugDao.delete(producer.getDrugs());
+        });
+    }
+    public void update(Producer producer) {
+        PharmacyDataBase.databaseWriteExecutor.execute(() -> {
+            producerDao.update(producer);
         });
     }
 }
