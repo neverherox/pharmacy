@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -24,8 +25,9 @@ public class UpdateDrugActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_drug);
-
+        setContentView(R.layout.activity_new_drug);
+        Button submit = (Button) findViewById(R.id.submit);
+        submit.setText("update");
 
         Bundle arguments = getIntent().getExtras();
         drug = (Drug)arguments.getSerializable("drug");
@@ -48,7 +50,7 @@ public class UpdateDrugActivity extends AppCompatActivity {
             }
         });
     }
-    public void updateDrug(View view)
+    public void createDrug(View view)
     {
         EditText drugName = findViewById(R.id.drugName);
         EditText drugDescription = findViewById(R.id.drugDescription);
