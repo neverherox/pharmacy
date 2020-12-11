@@ -12,6 +12,7 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         ProducerWithDrugs producer = (ProducerWithDrugs) producerListView.getItemAtPosition(info.position);
         switch (item.getItemId())
         {
-            case 1: producerViewModel.delete(producer); break;
+            case 1: producerViewModel.delete(producer.getProducer()); break;
             case 2: updateProducer(producer); break;
         }
 
@@ -106,15 +107,19 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("producer", producer.getProducer());
         startActivityForResult(intent,2);
     }
+    public void searchDrug(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         Producer producer = (Producer) data.getSerializableExtra("producer");
         switch(requestCode)
         {
-            case 1: ProducerWithDrugs newProducer = new ProducerWithDrugs();
-                    newProducer.setProducer(producer);
-                    producerViewModel.insert(newProducer);
+            case 1:
+                    producerViewModel.insert(producer);
                     break;
             case 2: producerViewModel.update(producer);
                     break;

@@ -23,7 +23,7 @@ public class DrugRepository {
         return drugDao.getAll(producerId);
     }
 
-
+    public LiveData<List<Drug>> getDrugs(String name) {return drugDao.getAll(name);}
     public void insert(Drug drug) {
         PharmacyDataBase.databaseWriteExecutor.execute(() -> {
             drugDao.insert(drug);

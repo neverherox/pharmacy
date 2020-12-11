@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.UpdateDrugActivity"></activity>
+        <activity android:name=".ui.SearchActivity"></activity>
+        <activity android:name=".ui.UpdateDrugActivity" />
         <activity android:name=".ui.UpdateProducerActivity" />
         <activity android:name=".ui.NewDrugActivity" />
         <activity android:name=".ui.NewProducerActivity" />

@@ -16,13 +16,11 @@ import by.grsu.homepharmacy.db.relation.ProducerWithDrugs;
 public class ProducerRepository {
     private PharmacyDataBase pharmacyDataBase;
     private ProducerDao producerDao;
-    private DrugDao drugDao;
     private LiveData<List<ProducerWithDrugs>> producers;
 
     public ProducerRepository(Application application) {
         pharmacyDataBase = PharmacyDataBase.getInstance(application);
         producerDao = pharmacyDataBase.producerDao();
-        drugDao = pharmacyDataBase.drugDao();
         producers = producerDao.getAll();
     }
 
@@ -34,19 +32,14 @@ public class ProducerRepository {
         return producerDao.getById(id);
     }
 
-    public void insert(ProducerWithDrugs producer) {
+    public void insert(Producer producer) {
         PharmacyDataBase.databaseWriteExecutor.execute(() -> {
-            long index = producerDao.insert(producer.getProducer());
-            for(Drug drug : producer.getDrugs()) {
-                drug.setProducer_id((int)index);
-            }
-            drugDao.insert(producer.getDrugs());
+            long index = producerDao.insert(producer);
         });
     }
-    public void delete(ProducerWithDrugs producer) {
+    public void delete(Producer producer) {
         PharmacyDataBase.databaseWriteExecutor.execute(() -> {
-        producerDao.delete(producer.getProducer());
-        drugDao.delete(producer.getDrugs());
+        producerDao.delete(producer);
         });
     }
     public void update(Producer producer) {

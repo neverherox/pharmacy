@@ -16,18 +16,20 @@ import by.grsu.homepharmacy.db.converter.FormConverter;
 import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.NO_ACTION;
 
-@Entity
+@Entity(
+        foreignKeys =
+        @ForeignKey(
+                entity = Producer.class,
+                parentColumns = "producerId",
+                childColumns = "producer_id",
+                onDelete = ForeignKey.CASCADE
+        )
+)
 public class Drug implements Serializable{
 
     @PrimaryKey(autoGenerate = true)
     private int drugId;
 
-    @ForeignKey
-            (entity = Producer.class,
-                    parentColumns = "producerId",
-                    childColumns = "producer_id",
-                    onDelete = NO_ACTION
-            )
     private int producer_id;
 
     @ColumnInfo(name = "drug_name")

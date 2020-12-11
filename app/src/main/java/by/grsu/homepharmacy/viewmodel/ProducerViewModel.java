@@ -22,10 +22,10 @@ public class ProducerViewModel extends AndroidViewModel {
     public LiveData<List<ProducerWithDrugs>> getProducers() {
         return producerRepository.getProducers();
     }
-    public void insert(ProducerWithDrugs producer) {
+    public void insert(Producer producer) {
         producerRepository.insert(producer);
     }
-    public void delete(ProducerWithDrugs producer) {
+    public void delete(Producer producer) {
         producerRepository.delete(producer);
     }
     public void update(Producer producer) {producerRepository.update(producer);}

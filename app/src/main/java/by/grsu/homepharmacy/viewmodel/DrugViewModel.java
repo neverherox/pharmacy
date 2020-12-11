@@ -25,6 +25,10 @@ public class DrugViewModel extends AndroidViewModel {
         return drugRepository.getDrugs(producerId);
     }
 
+    public LiveData<List<Drug>> getDrugs(String name)
+    {
+        return drugRepository.getDrugs(name);
+    }
     public void insert(Drug drug) {
             drugRepository.insert(drug);
     }
@@ -32,4 +36,5 @@ public class DrugViewModel extends AndroidViewModel {
         drugRepository.delete(drug);
     }
     public void update(Drug drug) {drugRepository.update(drug); }
+
 }

@@ -26,4 +26,8 @@ public interface DrugDao extends GenericDao<Drug>{
     @Transaction
     @Query("SELECT * FROM Drug WHERE producer_id =:producerId")
     LiveData<List<Drug>> getAll(int producerId);
+
+    @Transaction
+    @Query("SELECT * FROM Drug WHERE drug_name =:name")
+    LiveData<List<Drug>> getAll(String name);
 }

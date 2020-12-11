@@ -17,4 +17,10 @@
         android:layout_weight="0"
         android:onClick="createProducer"
         android:text="create producer" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:onClick="searchDrug"
+        android:text="search" />
 </LinearLayout>
