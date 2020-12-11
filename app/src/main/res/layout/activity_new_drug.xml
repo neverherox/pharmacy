@@ -18,20 +18,20 @@
         android:layout_height="wrap_content"
         android:hint="Enter drug description: "
         />
-
-    <EditText
-        android:id="@+id/drugExpirationDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter drug expiration date: "
-        />
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
 
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:onClick="showDatePickerDialog"
+        android:src="@drawable/date"
+
+        />
     <Button
         android:id="@+id/submit"
         android:layout_width="match_parent"

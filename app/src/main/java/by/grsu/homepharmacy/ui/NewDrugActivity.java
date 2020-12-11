@@ -1,6 +1,7 @@
 package by.grsu.homepharmacy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +21,15 @@ public class NewDrugActivity extends AppCompatActivity {
 
     private String[] forms = {Form.SOFT.toString(), Form.SOLID.toString(), Form.GASEOUS.toString(), Form.LIQUID.toString()};
     private String form;
+    private DialogFragment newFragment;
+    private Drug drug;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_drug);
         Button submit = (Button) findViewById(R.id.submit);
         submit.setText("create");
-
+        drug = new Drug();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, forms);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -51,10 +54,9 @@ public class NewDrugActivity extends AppCompatActivity {
         EditText drugDescription = findViewById(R.id.drugDescription);
         EditText drugExpirationDate = findViewById(R.id.drugExpirationDate);
 
-        Drug drug = new Drug();
+
         drug.setName(drugName.getText().toString());
         drug.setDescription(drugDescription.getText().toString());
-        drug.setExpirationDate(drugExpirationDate.getText().toString());
 
         drug.setForm(Form.valueOf(form));
 
@@ -62,5 +64,9 @@ public class NewDrugActivity extends AppCompatActivity {
         intent.putExtra("drug", drug);
         setResult(RESULT_OK, intent);
         finish();
+    }
+    public void showDatePickerDialog(View v) {
+        newFragment = new DatePickerFragment(drug);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
