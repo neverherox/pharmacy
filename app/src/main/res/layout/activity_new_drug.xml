@@ -33,6 +33,13 @@
 
         />
     <Button
+        android:id="@+id/drugImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="create"
+        android:onClick="insertImage"
+        />
+    <Button
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

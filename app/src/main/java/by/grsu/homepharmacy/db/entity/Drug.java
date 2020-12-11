@@ -42,6 +42,8 @@ public class Drug implements Serializable{
 
     private String expirationDate;
 
+    private String imageUri;
+
     public int getDrugId() {
         return drugId;
     }
@@ -90,4 +92,11 @@ public class Drug implements Serializable{
         this.expirationDate = expirationDate;
     }
 
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
 }

@@ -1,11 +1,15 @@
 package by.grsu.homepharmacy.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+
 
 import java.util.List;
 
@@ -38,6 +42,7 @@ public class DrugAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+    
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
@@ -49,6 +54,7 @@ public class DrugAdapter extends BaseAdapter {
         TextView drugDescription = (TextView) view.findViewById(R.id.drugDescription);
         TextView drugExpirationDate = (TextView) view.findViewById(R.id.drugExpirationDate);
         TextView drugForm = (TextView) view.findViewById(R.id.drugForm);
+        ImageView drugImage = (ImageView) view.findViewById(R.id.drugImage);
 
         Drug drug = drugs.get(position);
 
@@ -56,7 +62,8 @@ public class DrugAdapter extends BaseAdapter {
         drugDescription.setText(drug.getDescription());
         drugExpirationDate.setText(drug.getExpirationDate());
         drugForm.setText(drug.getForm().toString());
-
+        Uri uri = Uri.parse(drug.getImageUri());
+        drugImage.setImageURI(uri);
         return view;
     }
 }

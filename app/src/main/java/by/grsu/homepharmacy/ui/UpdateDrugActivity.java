@@ -1,6 +1,7 @@
 package by.grsu.homepharmacy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class UpdateDrugActivity extends AppCompatActivity {
     private Drug drug;
     private String[] forms = {Form.SOFT.toString(), Form.SOLID.toString(), Form.GASEOUS.toString(), Form.LIQUID.toString()};
     private String form;
+    private DialogFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,9 @@ public class UpdateDrugActivity extends AppCompatActivity {
     {
         EditText drugName = findViewById(R.id.drugName);
         EditText drugDescription = findViewById(R.id.drugDescription);
-        EditText drugExpirationDate = findViewById(R.id.drugExpirationDate);
 
         drug.setName(drugName.getText().toString());
         drug.setDescription(drugDescription.getText().toString());
-        drug.setExpirationDate(drugExpirationDate.getText().toString());
 
         drug.setForm(Form.valueOf(form));
 
@@ -66,5 +66,9 @@ public class UpdateDrugActivity extends AppCompatActivity {
         intent.putExtra("drug", drug);
         setResult(RESULT_OK, intent);
         finish();
+    }
+    public void showDatePickerDialog(View v) {
+        newFragment = new DatePickerFragment(drug);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
