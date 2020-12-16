@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity {
         drugViewModel = new ViewModelProvider(this).get(DrugViewModel.class);
         EditText drugName = (EditText) findViewById(R.id.drugName);
         registerForContextMenu(drugListView);
-
+        createDrugAdapter("");
         drugName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -47,21 +47,25 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                createDrugAdapter(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                drugViewModel.getDrugs(drugName.getText().toString()).observe(SearchActivity.this, new Observer<List<Drug>>()
-                {
-                    @Override
-                    public void onChanged(List<Drug> drugs) {
-                        drugAdapter = new DrugAdapter(SearchActivity.this, drugs);
-                        drugListView.setAdapter(drugAdapter);
-                        drugAdapter.notifyDataSetChanged();
-                    }
-                });
+
+            }
+        });
+    }
+    private void createDrugAdapter(String name)
+    {
+        drugViewModel.getDrugs(name).observe(SearchActivity.this, new Observer<List<Drug>>()
+        {
+            @Override
+            public void onChanged(List<Drug> drugs) {
+                drugAdapter = new DrugAdapter(SearchActivity.this, drugs);
                 drugListView.setAdapter(drugAdapter);
+                drugAdapter.notifyDataSetChanged();
+
             }
         });
     }

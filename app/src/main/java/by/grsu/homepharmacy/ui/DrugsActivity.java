@@ -47,8 +47,6 @@ public class DrugsActivity extends AppCompatActivity {
                 drugAdapter.notifyDataSetChanged();
             }
         });
-
-        drugListView.setAdapter(drugAdapter);
     }
 
     @Override

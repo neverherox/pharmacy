@@ -28,6 +28,6 @@ public interface DrugDao extends GenericDao<Drug>{
     LiveData<List<Drug>> getAll(int producerId);
 
     @Transaction
-    @Query("SELECT * FROM Drug WHERE drug_name =:name")
+    @Query("SELECT * FROM Drug WHERE drug_name LIKE '%' || :name  || '%'")
     LiveData<List<Drug>> getAll(String name);
 }
